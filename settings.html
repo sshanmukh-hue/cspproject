@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Settings - ElderSafe</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="phone"><div class="topbar"><a href="dashboard.html" class="back-btn">←</a><h1>Settings</h1></div><div class="screen">
+<div class="card"><p class="card-sub">Countdown</p><select id="countdown" onchange="save()"><option value="10">10 seconds</option><option value="20">20 seconds</option><option value="30">30 seconds</option></select></div>
+<div class="card"><p class="card-sub">Message Mode</p><p class="small">SMS sending uses the backend when configured. Demo mode never opens Chrome or another app.</p></div>
+<button class="btn btn-outline" onclick="logout()">Logout</button></div>
+<nav class="bottom-nav"><a href="dashboard.html">🏠<span>Home</span></a><a href="location.html">📍<span>Location</span></a><a href="history.html">🕐<span>History</span></a><a class="active" href="settings.html">⚙️<span>Settings</span></a></nav></div>
+<script src="js/app.js"></script><script>requireAuth();const s=getSettings();countdown.value=s.countdown||30;function save(){const s=getSettings();s.countdown=Number(countdown.value);saveSettings(s);}function logout(){localStorage.clear();location.href="index.html";}</script></body></html>

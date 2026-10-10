@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fall Detected - ElderSafe</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="phone red-page"><div class="topbar"><a href="dashboard.html" class="back-btn">←</a><h1>Fall Detected</h1></div>
+<div class="screen center"><div class="warning">⚠️</div><p class="danger-title">Possible Fall Detected</p><p class="small">Are you okay?</p><p class="small">SOS will be sent in:</p>
+<div class="ring-wrap"><div class="ring"><span id="countNum">30</span><small>seconds</small></div></div>
+<button class="btn btn-green mb" onclick="imOk()">✔ I'm OK</button><button class="btn btn-red" onclick="sendSOS()">🆘 Send SOS Now</button></div></div>
+<script src="js/app.js"></script><script>
+requireAuth();const settings=getSettings();let seconds=settings.countdown||30;countNum.textContent=seconds;
+const timer=setInterval(()=>{seconds--;countNum.textContent=seconds;if(seconds<=0){clearInterval(timer);sendSOS();}},1000);
+function imOk(){clearInterval(timer);location.href="dashboard.html";}
+function sendSOS(){clearInterval(timer);const c=getContact();if(!c||!c.phone){alert("Please add the emergency contact number first.");location.href="contact.html";return;}
+addAlert({type:"Fall Alert",icon:"fall",time:formatNow(),status:"Sending"});
+sendEmergencySMS("Fall Alert - Possible fall detected",(ok)=>{updateLastAlertStatus(ok?"Sent":"Failed");location.href=ok?"sos-sent.html":"history.html";});
+}
+</script></body></html>

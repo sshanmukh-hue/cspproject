@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Emergency Contact - ElderSafe</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="phone"><div class="topbar"><a href="dashboard.html" class="back-btn">←</a><h1>Emergency Contact</h1></div>
+<div class="screen" id="viewMode"><div class="card" id="contactCard" style="display:none"><div class="card-row"><div class="avatar">👤</div><div><p class="card-title" id="cName">-</p><p class="small" id="cPhone">-</p></div></div><span class="pill">Primary</span></div>
+<p id="noContact" class="small center" style="display:none">No emergency contact added yet.</p>
+<div class="card clickable" onclick="showForm()"><div class="card-row between"><span class="card-title">✏️ Edit Contact</span><span>›</span></div></div>
+<div class="card info">🛡️ Make sure your emergency contact is always reachable.</div></div>
+<div class="screen" id="formMode" style="display:none"><div class="field"><label>Contact Name</label><input id="inName" placeholder="e.g. Father"></div>
+<div class="field"><label>Contact Number</label><input id="inPhone" type="tel" placeholder="+91XXXXXXXXXX"></div>
+<button class="btn btn-primary" onclick="save()">Save Contact</button></div>
+<nav class="bottom-nav"><a href="dashboard.html">🏠<span>Home</span></a><a href="location.html">📍<span>Location</span></a><a href="history.html">🕐<span>History</span></a><a href="settings.html">⚙️<span>Settings</span></a></nav>
+</div><script src="js/app.js"></script><script>
+requireAuth();
+function render(){const c=getContact();if(c){contactCard.style.display="block";noContact.style.display="none";cName.textContent=c.name;cPhone.textContent=c.phone||"";}else{contactCard.style.display="none";noContact.style.display="block";}}
+function showForm(){const c=getContact();inName.value=c?c.name:"";inPhone.value=c?c.phone:"";viewMode.style.display="none";formMode.style.display="block";}
+function save(){const name=inName.value.trim(),phone=inPhone.value.trim();if(!name||!phone){alert("Please enter contact name and number.");return;}if(!/^\+?[0-9\s-]{10,15}$/.test(phone)){alert("Enter a valid phone number.");return;}saveContact({name,phone,primary:true});formMode.style.display="none";viewMode.style.display="block";render();alert("Emergency contact saved.");}
+render();
+</script></body></html>

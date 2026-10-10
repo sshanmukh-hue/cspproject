@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ElderSafe - Login</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="phone center-page">
+  <div class="screen center">
+    <div class="logo">🛡️</div>
+    <h1>ElderSafe</h1>
+    <p class="small">Fall Detection & Emergency Alert System</p>
+    <div class="card full">
+      <div class="field"><label>Name</label><input id="name" placeholder="Enter your name"></div>
+      <button class="btn btn-primary" onclick="login()">Continue</button>
+    </div>
+    <p class="small">Your emergency contact stays on this device.</p>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+function login(){
+  const name=document.getElementById("name").value.trim();
+  if(!name){alert("Please enter your name.");return;}
+  localStorage.setItem("elderSafeUser",JSON.stringify({name}));
+  location.href="dashboard.html";
+}
+</script>
+</body></html>

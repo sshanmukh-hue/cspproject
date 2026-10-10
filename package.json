@@ -1,0 +1,7 @@
+{
+  "name":"eldersafe-sos-server",
+  "version":"1.0.0",
+  "private":true,
+  "scripts":{"start":"node server.js"},
+  "dependencies":{"cors":"^2.8.5","dotenv":"^16.4.5","express":"^4.21.2","twilio":"^5.3.6"}
+}

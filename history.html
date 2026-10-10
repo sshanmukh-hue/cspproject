@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alert History - ElderSafe</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="phone"><div class="topbar"><a href="dashboard.html" class="back-btn">←</a><h1>Alert History</h1></div><div class="screen" id="list"></div>
+<nav class="bottom-nav"><a href="dashboard.html">🏠<span>Home</span></a><a href="location.html">📍<span>Location</span></a><a class="active" href="history.html">🕐<span>History</span></a><a href="settings.html">⚙️<span>Settings</span></a></nav></div>
+<script src="js/app.js"></script><script>requireAuth();const listEl=document.getElementById("list"),alerts=getAlerts();if(!alerts.length)listEl.innerHTML='<p class="small center mt">No alerts yet.</p>';else alerts.forEach(a=>{const row=document.createElement("div");row.className="alert-item";row.innerHTML='<div class="alert-icon '+a.icon+'">'+(a.icon==="fall"?"🚶":"🆘")+'</div><div class="grow"><p class="card-title">'+escapeHTML(a.type)+'</p><p class="small">'+escapeHTML(a.time)+'</p></div><span class="status-tag '+(a.status==="Sent"?"status-sent":a.status==="Failed"?"status-failed":"status-resolved")+'">'+escapeHTML(a.status)+'</span>';listEl.appendChild(row);});</script></body></html>
